@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Counter App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192.png">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="app-header">
+            <div class="app-title">
+                <i class="fas fa-calculator"></i>
+                <h1>Ultimate Counter</h1>
+            </div>
+            <div class="header-controls">
+                <div class="theme-toggle">
+                    <button id="darkModeToggle" class="btn btn-icon" title="Toggle Dark Mode">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button id="lightModeToggle" class="btn btn-icon" title="Toggle Light Mode">
+                        <i class="fas fa-sun"></i>
+                    </button>
+                </div>
+                <div class="sound-toggle">
+                    <button id="soundToggle" class="btn btn-icon" title="Toggle Sound">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                </div>
+                <div class="ui-toggle">
+                    <button id="uiToggle" class="btn" title="Toggle UI Style">
+                        <i class="fas fa-gem"></i> UI Style
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Counter Section -->
+        <main class="main-content">
+            <div class="counter-container">
+                <!-- Counter Display and Controls -->
+                <div class="counter-card">
+                    <div class="counter-header">
+                        <div class="counter-name">
+                            <input type="text" id="counterName" value="Main Counter" maxlength="20">
+                            <button id="renameCounter" class="btn btn-icon" title="Rename Counter">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                        <div class="counter-actions">
+                            <button id="addCounterBtn" class="btn btn-success" title="Add New Counter">
+                                <i class="fas fa-plus"></i> Add Counter
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="counter-value-display">
+                        <div class="counter-value" id="counterValue">0</div>
+                    </div>
+
+                    <!-- Progress Bar for Target -->
+                    <div class="progress-section" id="progressSection">
+                        <div class="progress-label">
+                            <span id="progressText">Progress to Goal: 0%</span>
+                            <span id="goalValue">Goal: 100</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+
+                    <!-- Main Control Buttons -->
+                    <div class="counter-controls">
+                        <button id="decrementBtn" class="btn btn-icon btn-primary" title="Decrement">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button id="resetBtn" class="btn btn-danger" title="Reset Counter">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                        <button id="incrementBtn" class="btn btn-icon btn-primary" title="Increment">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+
+                    <!-- Step Controls -->
+                    <div class="step-controls">
+                        <div class="step-buttons">
+                            <button class="btn step-btn" data-step="1">+1</button>
+                            <button class="btn step-btn" data-step="5">+5</button>
+                            <button class="btn step-btn" data-step="10">+10</button>
+                            <button class="btn step-btn" data-step="-1">-1</button>
+                            <button class="btn step-btn" data-step="-5">-5</button>
+                        </div>
+                        <div class="custom-step">
+                            <input type="number" id="customStep" value="1" min="1" max="100">
+                            <button id="applyStep" class="btn btn-secondary">Set Step</button>
+                        </div>
+                    </div>
+
+                    <!-- Manual Input -->
+                    <div class="manual-input">
+                        <input type="number" id="manualInput" placeholder="Enter value manually">
+                        <button id="applyManual" class="btn btn-secondary">Set Value</button>
+                    </div>
+
+                    <!-- Timer Controls -->
+                    <div class="timer-controls">
+                        <div class="timer-section">
+                            <h3><i class="fas fa-clock"></i> Timer Controls</h3>
+                            <div class="timer-buttons">
+                                <button id="startTimer" class="btn btn-success">
+                                    <i class="fas fa-play"></i> Auto-Increment
+                                </button>
+                                <button id="startDecrementTimer" class="btn btn-warning">
+                                    <i class="fas fa-play"></i> Auto-Decrement
+                                </button>
+                                <button id="stopTimer" class="btn btn-danger">
+                                    <i class="fas fa-stop"></i> Stop
+                                </button>
+                            </div>
+                            <div class="timer-input">
+                                <input type="number" id="timerInterval" value="1000" min="100" max="10000">
+                                <span>ms interval</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Undo/Redo Controls -->
+                    <div class="undo-redo-controls">
+                        <button id="undoBtn" class="btn btn-outline" title="Undo">
+                            <i class="fas fa-undo"></i> Undo
+                        </button>
+                        <button id="redoBtn" class="btn btn-outline" title="Redo">
+                            <i class="fas fa-redo"></i> Redo
+                        </button>
+                    </div>
+
+                    <!-- Share & Export Controls -->
+                    <div class="share-controls">
+                        <button id="shareBtn" class="btn btn-secondary" title="Share Counter Value">
+                            <i class="fas fa-share-alt"></i> Share
+                        </button>
+                        <button id="copyBtn" class="btn btn-secondary" title="Copy Counter Value">
+                            <i class="fas fa-copy"></i> Copy
+                        </button>
+                        <button id="exportBtn" class="btn btn-secondary" title="Export Counter Data">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                        <button id="importBtn" class="btn btn-secondary" title="Import Counter Data">
+                            <i class="fas fa-upload"></i> Import
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Settings Panel -->
+                <div class="settings-panel">
+                    <h2 class="panel-title">
+                        <i class="fas fa-cog"></i> Settings
+                    </h2>
+
+                    <!-- Limits Settings -->
+                    <div class="setting-group">
+                        <h3>Counter Limits</h3>
+                        <div class="input-group">
+                            <label for="minValue">Minimum Value:</label>
+                            <input type="number" id="minValue" value="0">
+                        </div>
+                        <div class="input-group">
+                            <label for="maxValue">Maximum Value:</label>
+                            <input type="number" id="maxValue" value="1000">
+                        </div>
+                    </div>
+
+                    <!-- Target Setting -->
+                    <div class="setting-group">
+                        <h3>Goal/Target</h3>
+                        <div class="input-group">
+                            <label for="targetValue">Set Target:</label>
+                            <input type="number" id="targetValue" value="100">
+                            <button id="setTarget" class="btn btn-secondary">Set</button>
+                        </div>
+                    </div>
+
+                    <!-- Visual Settings -->
+                    <div class="setting-group">
+                        <h3>Visual Settings</h3>
+                        <div class="input-group">
+                            <label for="fontSize">Font Size:</label>
+                            <input type="range" id="fontSize" min="20" max="150" value="80">
+                            <span id="fontSizeValue">80px</span>
+                        </div>
+                        <div class="input-group">
+                            <label for="fontStyle">Font Style:</label>
+                            <select id="fontStyle">
+                                <option value="Roboto Slab">Roboto Slab</option>
+                                <option value="Poppins">Poppins</option>
+                                <option value="Arial">Arial</option>
+                                <option value="Courier New">Courier New</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="bgColor">Background Color:</label>
+                            <input type="color" id="bgColor" value="#ffffff">
+                        </div>
+                    </div>
+
+                    <!-- Sound Settings -->
+                    <div class="setting-group">
+                        <h3>Sound Settings</h3>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="enableSound" checked>
+                            <label for="enableSound">Enable Click Sounds</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="enableVibration" checked>
+                            <label for="enableVibration">Enable Vibration (Mobile)</label>
+                        </div>
+                    </div>
+
+                    <!-- Counter Management -->
+                    <div class="setting-group">
+                        <h3>Counter Management</h3>
+                        <div class="counter-list" id="counterList">
+                            <!-- Counters will be dynamically added here -->
+                        </div>
+                        <div class="counter-actions">
+                            <button id="deleteCounter" class="btn btn-danger">
+                                <i class="fas fa-trash"></i> Delete Selected
+                            </button>
+                            <button id="addCategory" class="btn btn-secondary">
+                                <i class="fas fa-tag"></i> Add Category
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Category/Tag Management -->
+                    <div class="setting-group">
+                        <h3>Categories/Tags</h3>
+                        <div class="tag-container" id="tagContainer">
+                            <!-- Tags will be dynamically added here -->
+                        </div>
+                        <div class="tag-input">
+                            <input type="text" id="newTag" placeholder="Add new tag">
+                            <button id="addTag" class="btn btn-secondary">Add</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- History Panel -->
+            <div class="history-panel">
+                <div class="history-header">
+                    <h2 class="panel-title">
+                        <i class="fas fa-history"></i> Counter History
+                    </h2>
+                    <button id="clearHistory" class="btn btn-danger">
+                        <i class="fas fa-trash"></i> Clear History
+                    </button>
+                </div>
+                <div class="history-list" id="historyList">
+                    <!-- History items will be dynamically added here -->
+                </div>
+            </div>
+
+            <!-- Confirmation Modal -->
+            <div class="modal" id="confirmationModal">
+                <div class="modal-content">
+                    <h3>Confirm Action</h3>
+                    <p id="modalMessage">Are you sure you want to perform this action?</p>
+                    <div class="modal-buttons">
+                        <button id="confirmAction" class="btn btn-danger">Confirm</button>
+                        <button id="cancelAction" class="btn btn-secondary">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Import Modal -->
+            <div class="modal" id="importModal">
+                <div class="modal-content">
+                    <h3>Import Counter Data</h3>
+                    <textarea id="importData" placeholder="Paste counter data here..."></textarea>
+                    <div class="modal-buttons">
+                        <button id="confirmImport" class="btn btn-primary">Import</button>
+                        <button id="cancelImport" class="btn btn-secondary">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notification -->
+            <div class="notification" id="notification">
+                <div class="notification-content">
+                    <span id="notificationText"></span>
+                </div>
+            </div>
+
+            <!-- Loading Overlay -->
+            <div class="loading-overlay" id="loadingOverlay">
+                <div class="spinner"></div>
+                <p>Loading Counter App...</p>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <div class="footer-info">
+                <p>Ultimate Counter App &copy; 2023 | All features implemented</p>
+                <p class="feature-count">60 Features | PWA Ready | Offline Support</p>
+            </div>
+            <div class="footer-controls">
+                <button id="installBtn" class="btn btn-secondary">
+                    <i class="fas fa-download"></i> Install App
+                </button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Keyboard Shortcuts Helper -->
+    <div class="keyboard-help">
+        <button id="keyboardHelpBtn" class="btn btn-icon" title="Keyboard Shortcuts">
+            <i class="fas fa-keyboard"></i>
+        </button>
+        <div class="keyboard-help-content" id="keyboardHelpContent">
+            <h4>Keyboard Shortcuts</h4>
+            <ul>
+                <li><kbd>↑</kbd> or <kbd>+</kbd>: Increment</li>
+                <li><kbd>↓</kbd> or <kbd>-</kbd>: Decrement</li>
+                <li><kbd>R</kbd>: Reset Counter</li>
+                <li><kbd>Z</kbd>: Undo</li>
+                <li><kbd>Y</kbd>: Redo</li>
+                <li><kbd>D</kbd>: Toggle Dark Mode</li>
+                <li><kbd>S</kbd>: Toggle Sound</li>
+                <li><kbd>H</kbd>: Show History</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Audio Elements for Sound Effects -->
+    <audio id="clickSound" src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" preload="auto"></audio>
+    <audio id="successSound" src="https://assets.mixkit.co/sfx/preview/mixkit-correct-answer-tone-2870.mp3" preload="auto"></audio>
+    <audio id="errorSound" src="https://assets.mixkit.co/sfx/preview/mixkit-wrong-answer-fail-notification-946.mp3" preload="auto"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
